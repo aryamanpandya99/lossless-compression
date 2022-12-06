@@ -21,9 +21,11 @@ class huffman_tree {
 private:
     Node* head; 
     int total_bits; 
+    std::map<char, int> frequency_map_; 
 
 public:
     huffman_tree();
     huffman_tree(string input);
-    std::map<char, int> process_string(string input);      
+    void process_string(string input);  
+    void print_map();     
 }; 

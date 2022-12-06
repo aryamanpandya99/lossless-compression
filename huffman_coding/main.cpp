@@ -14,5 +14,7 @@ int main()
     string input; 
     cout << "Enter a string to compress: ";  
     cin >> input; 
-}
 
+    huffman_tree tree(input); 
+    tree.print_map(); 
+}
