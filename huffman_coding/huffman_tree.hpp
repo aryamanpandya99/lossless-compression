@@ -3,6 +3,8 @@
     
 */
 
+//build a minheap and then use this as a priority queue 
+
 #include <iostream>
 #include <vector>
 #include <map>
@@ -29,4 +31,6 @@ public:
     void print_map();   
     void create_node(char character, int frequency); 
     void swap_nodes(Node* x, Node* y);   
+    void heapify(int idx); 
+
 }; 
