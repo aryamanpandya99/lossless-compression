@@ -40,3 +40,21 @@ void huffman_tree::print_map()
         cout << elem.first << " : "<<elem.second << " \n"; 
     }
 }
+
+Node* huffman_tree::create_node(char alphaNum, int freq)
+{
+    Node * new_node; 
+    new_node->character = alphaNum; 
+    new_node->frequency = freq; 
+    new_node-> left = nullptr; 
+    new_node->right = nullptr; 
+
+}
+
+void huffman_tree::swap_nodes(Node** x, Node** y)
+{
+    Node * tmp; 
+    tmp = x; 
+    *x = *y; 
+    *y = tmp; 
+}

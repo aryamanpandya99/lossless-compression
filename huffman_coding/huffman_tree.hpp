@@ -12,20 +12,21 @@ struct Node {
     char character; 
     int frequency; 
     int code; 
-    Node* right; 
-    Node* left; 
+    Node* left, right; 
 }; 
 
 class huffman_tree {
 
 private:
-    Node* head; 
-    int total_bits; 
+    Node** array; 
+    int size, total_size;  
     std::map<char, int> frequency_map_; 
 
 public:
     huffman_tree();
     huffman_tree(string input);
     void process_string(string input);  
-    void print_map();     
+    void print_map();   
+    void create_node(char character, int frequency); 
+    void swap_nodes(Node* x, Node* y);   
 }; 
