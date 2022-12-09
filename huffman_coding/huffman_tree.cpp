@@ -58,3 +58,27 @@ void huffman_tree::swap_nodes(Node** x, Node** y)
     *x = *y; 
     *y = tmp; 
 }
+
+void huffman_tree::heapify(int idx)
+{
+    int l, r, min = idx; 
+    l = 2 * idx + 1; 
+    r = 2 * idx + 2; 
+
+    int size = min_heap_->current_size; 
+
+    if(l < size && min_heap_->arr[l]->frequency < min_heap_->arr[idx]->frequency)
+    {
+        min = l; 
+    }
+    if(r < size && min_heap_->arr[r]->frequency < min_heap_->arr[min]->frequency)
+    {
+        min = r; 
+    }
+
+    if(min != idx)
+    {
+        swap_nodes(&min_heap_->arr[min], &min_heap_->arr[idx])
+        heapify(min); 
+    }
+}
