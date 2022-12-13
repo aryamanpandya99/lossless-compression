@@ -26,7 +26,7 @@ class huffman_tree {
 
 private:
     struct minheap* min_heap_; 
-    int num_chars_;  
+    int num_chars_, num_chars_unique_;  
     std::string input_string_; 
     std::map<char, int> frequency_map_; 
 

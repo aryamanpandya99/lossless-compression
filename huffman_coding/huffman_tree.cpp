@@ -67,13 +67,13 @@ void huffman_tree::swap_nodes(Node** x, Node** y)
 
 void huffman_tree::freq_map_to_minheap()
 {
-    int num_unique_chars = frequency_map_.size();  
+    num_chars_unique_ = frequency_map_.size();  
     
-    min_heap_->size = num_chars_; 
+    min_heap_->size = num_chars_unique_; 
     min_heap_->arr = (struct Node**)malloc(
         min_heap_->size * sizeof(struct Node*));
 
-    for (int i = 0; i < num_unique_chars; i++)
+    for (int i = 0; i < num_chars_unique_; i++)
     {
         min_heap_->arr[i] = new Node; 
     }
@@ -86,15 +86,16 @@ void huffman_tree::freq_map_to_minheap()
         min_heap_->arr[i]->frequency = characters.second; 
         i++; 
     } 
+    min_heap_->current_size = num_chars_unique_; 
 }
 
 void huffman_tree::heapify(int idx)
-{
+{ 
     int l, r, min = idx; 
     l = 2 * idx + 1; 
     r = 2 * idx + 2; 
 
-    int size = min_heap_->current_size; 
+    int size = min_heap_->current_size;  
 
     if(l < size && min_heap_->arr[l]->frequency < min_heap_->arr[idx]->frequency)
     {
@@ -114,17 +115,16 @@ void huffman_tree::heapify(int idx)
 
 void huffman_tree::buildHeap()
 {
-    int start = (num_chars_ / 2) - 1; 
-    for (int i = start; i >= 0; i--)
-    {
+    int start = min_heap_->size -1; 
+    for (int i = (start -1) / 2; i >= 0; i--)
+    { 
         heapify(i); 
     }
 }
 
 void huffman_tree::print_heap()
 {
-    cout << "*****" << "Printing heap"<< "*****"<<endl; 
-    cout << min_heap_->size << endl; 
+    cout << "*****" << "Printing heap"<< "*****"<<endl;  
     for (int i = 0; i < min_heap_->size; i++)
     {
         cout << min_heap_->arr[i]->character << ": "; 

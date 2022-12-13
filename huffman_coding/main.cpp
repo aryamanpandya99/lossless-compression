@@ -20,4 +20,7 @@ int main()
     tree.print_map(); 
     tree.freq_map_to_minheap(); 
     tree.print_heap(); 
+    tree.buildHeap(); 
+    cout << "Turning array to min heap\n"; 
+    tree.print_heap(); 
 }
