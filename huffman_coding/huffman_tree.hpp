@@ -13,24 +13,36 @@ using namespace std;
 struct Node {
     char character; 
     int frequency; 
-    int code; 
-    Node* left, right; 
+    Node* left; 
+    Node* right;  
 }; 
+
+struct minheap {
+    int size, current_size; 
+    struct Node** arr; 
+};
 
 class huffman_tree {
 
 private:
-    Node** array; 
-    int size, total_size;  
+    struct minheap* min_heap_; 
+    int num_chars_;  
+    std::string input_string_; 
     std::map<char, int> frequency_map_; 
 
 public:
     huffman_tree();
     huffman_tree(string input);
+    
     void process_string(string input);  
     void print_map();   
-    void create_node(char character, int frequency); 
-    void swap_nodes(Node* x, Node* y);   
+    
+    Node* create_node(char character, int frequency); 
+    void freq_map_to_minheap(); 
+    void swap_nodes(Node** x, Node** y);   
+    
     void heapify(int idx); 
+    void buildHeap(); 
+    void print_heap(); 
 
 }; 
