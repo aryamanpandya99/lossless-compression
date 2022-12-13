@@ -16,5 +16,8 @@ int main()
     cin >> input; 
 
     huffman_tree tree(input); 
+    tree.process_string(); 
     tree.print_map(); 
+    tree.freq_map_to_minheap(); 
+    tree.print_heap(); 
 }

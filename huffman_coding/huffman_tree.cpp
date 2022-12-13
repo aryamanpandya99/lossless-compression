@@ -18,18 +18,18 @@ huffman_tree::huffman_tree(string input)
     num_chars_ = input_string_.length(); 
 }
 
-void huffman_tree::process_string(string input)
+void huffman_tree::process_string()
 {
-    num_chars_ = input.length(); 
+    
     for (int i = 0; i < num_chars_; i++)
     {
-        if(frequency_map_.count(input[i]))
+        if(frequency_map_.count(input_string_[i]))
         {
-            frequency_map_[input[i]]++; 
+            frequency_map_[input_string_[i]]++; 
         }
         else
         {
-            frequency_map_.insert(std::pair<char, int>(input[i], 1)); 
+            frequency_map_.insert(std::pair<char, int>(input_string_[i], 1)); 
         }
     }
 
@@ -37,10 +37,12 @@ void huffman_tree::process_string(string input)
 
 void huffman_tree::print_map()
 {
+    cout << "*****" << "Printing map"<< "*****"<<endl; 
     for (const auto& elem : frequency_map_)
     {
         cout << elem.first << " : "<<elem.second << " \n"; 
     }
+    cout << "*****" << "Map Printed"<< "*****"<<endl; 
 }
 
 Node* huffman_tree::create_node(char alphaNum, int freq)
@@ -65,14 +67,20 @@ void huffman_tree::swap_nodes(Node** x, Node** y)
 
 void huffman_tree::freq_map_to_minheap()
 {
-    min_heap_->arr = new struct Node*[num_chars_]; 
+    cout <<"here \n"; 
+    min_heap_->size = num_chars_; 
+    min_heap_->arr = (struct Node**)malloc(
+        min_heap_->size * sizeof(struct Node*));
+    
     int i = 0; 
     for (const auto& characters : frequency_map_)
     {
-        min_heap_->arr[i]->character = characters.first; 
-        min_heap_->arr[i]->frequency = characters.second; 
+        cout << min_heap_->arr[i]->character; 
+        //min_heap_->arr[i]->character = characters.first; 
+        //min_heap_->arr[i]->frequency = characters.second; 
         i++; 
     } 
+    cout <<"\n"<< i<< ", " << num_chars_<<"\n"; 
 }
 
 void huffman_tree::heapify(int idx)
@@ -110,8 +118,10 @@ void huffman_tree::buildHeap()
 
 void huffman_tree::print_heap()
 {
+    cout << "*****" << "Printing heap"<< "*****"<<endl; 
     for (int i = 0; i < num_chars_; i++)
     {
         cout << min_heap_->arr[i]->character << ": " << min_heap_->arr[i]->frequency; 
     }
+    cout << "*****" << "Heap Printed"<< "*****"<<endl; 
 }

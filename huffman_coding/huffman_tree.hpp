@@ -34,7 +34,7 @@ public:
     huffman_tree();
     huffman_tree(string input);
     
-    void process_string(string input);  
+    void process_string();  
     void print_map();   
     
     Node* create_node(char character, int frequency); 
