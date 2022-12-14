@@ -132,3 +132,15 @@ void huffman_tree::print_heap()
     }
     cout << "*****" << "Heap Printed"<< "*****"<<endl; 
 }
+
+struct Node* huffman_tree::pop_min()
+{
+    struct Node* tmp = min_heap_->arr[0]; 
+    min_heap_->arr[0] = min_heap_->arr[min_heap_->current_size - 1]; 
+
+    min_heap_->current_size--; 
+    heapify(0); 
+
+    return tmp; 
+
+}

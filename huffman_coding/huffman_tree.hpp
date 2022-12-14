@@ -44,5 +44,6 @@ public:
     void heapify(int idx); 
     void buildHeap(); 
     void print_heap(); 
+    struct Node* pop_min(); 
 
 }; 
