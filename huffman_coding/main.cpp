@@ -27,6 +27,7 @@ int main()
     tree.print_heap(); 
 
     Node* tmp = tree.pop_min();
-    cout << tmp->character<<endl; 
+    tree.print_heap(); 
+
 
 }
