@@ -160,7 +160,7 @@ void huffman_tree::insert_heap_node(Node* a)
 
     while(i > 0 && min_heap_->arr[(i-1)/2]->frequency > a->frequency)
     {
-        min_heap_->arr[i] = min_heap_->array[(i-1)/2]; 
+        min_heap_->arr[i] = min_heap_->arr[(i-1)/2]; 
         i = (i-1) / 2; 
     }
 
@@ -176,11 +176,13 @@ void huffman_tree::build_huffman_tree()
         left = pop_min(); 
         right = pop_min(); 
 
-        top = new Node('$', left -> frequency + right->frequency); 
+        top = new Node; 
+        top->character = '$';
+        top->frequency =  left -> frequency + right->frequency; 
 
         top -> left = left; 
         top -> right = right; 
 
-
+        insert_heap_node(top);
     }
 }

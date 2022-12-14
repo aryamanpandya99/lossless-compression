@@ -45,5 +45,8 @@ public:
     void buildHeap(); 
     void print_heap(); 
     struct Node* pop_min(); 
+    void insert_heap_node(Node* a); 
+
+    void build_huffman_tree();
 
 }; 
