@@ -26,8 +26,8 @@ int main()
     cout << "Turning array to min heap\n"; 
     tree.print_heap(); 
 
-    Node* tmp = tree.pop_min();
-    tree.print_heap(); 
-
+    //Node* tmp = tree.pop_min();
+    //tree.print_heap(); 
+    Node* root = tree.build_huffman_tree();
 
 }

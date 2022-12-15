@@ -29,6 +29,7 @@ private:
     int num_chars_, num_chars_unique_;  
     std::string input_string_; 
     std::map<char, int> frequency_map_; 
+    Node* top_; 
 
 public:
     huffman_tree();
@@ -47,6 +48,6 @@ public:
     struct Node* pop_min(); 
     void insert_heap_node(Node* a); 
 
-    void build_huffman_tree();
+    Node* build_huffman_tree();
 
 }; 

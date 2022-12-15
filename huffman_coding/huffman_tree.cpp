@@ -10,12 +10,14 @@ using namespace std;
 huffman_tree::huffman_tree()
 {
     num_chars_ = 0; 
+    top_ = new Node;
 }
 
 huffman_tree::huffman_tree(string input)
 {
     input_string_ = input; 
     num_chars_ = input_string_.length(); 
+    top_ = new Node;
 }
 
 void huffman_tree::process_string()
@@ -167,22 +169,27 @@ void huffman_tree::insert_heap_node(Node* a)
     min_heap_->arr[i] = a; 
 }
 
-void huffman_tree::build_huffman_tree()
+Node* huffman_tree::build_huffman_tree()
 {
-    struct Node* left, * right, *top; 
+    struct Node* left, * right; 
     
     while(min_heap_->current_size != 1)
     {
         left = pop_min(); 
         right = pop_min(); 
+ 
+        top_->character = '$';
+        top_->frequency =  left -> frequency + right->frequency; 
 
-        top = new Node; 
-        top->character = '$';
-        top->frequency =  left -> frequency + right->frequency; 
+        top_ -> left = left; 
+        top_ -> right = right; 
 
-        top -> left = left; 
-        top -> right = right; 
-
-        insert_heap_node(top);
+        insert_heap_node(top_);
     }
+
+    top_ = pop_min(); 
+
+    
+    return top_; 
+
 }
