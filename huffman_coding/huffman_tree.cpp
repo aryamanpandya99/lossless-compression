@@ -4,8 +4,11 @@
 */
 
 #include "huffman_tree.hpp"
+#include <string>
 
 using namespace std; 
+
+char COUNTER_CHAR = '#'; 
 
 huffman_tree::huffman_tree()
 {
@@ -157,8 +160,7 @@ void huffman_tree::insert_heap_node(Node* a)
     }
 
     min_heap_->current_size++; 
-    int i = min_heap_->current_size; 
-    min_heap_->arr[i] = a; 
+    int i = min_heap_->current_size - 1; 
 
     while(i > 0 && min_heap_->arr[(i-1)/2]->frequency > a->frequency)
     {
@@ -167,6 +169,17 @@ void huffman_tree::insert_heap_node(Node* a)
     }
 
     min_heap_->arr[i] = a; 
+}
+
+string huffman_tree::arr_to_str(int tree[], int n)
+{
+    string out; 
+    for(int i = 0; i < n; i++)
+    {
+        out+=to_string(tree[i]); 
+    }
+    
+    return out; 
 }
 
 Node* huffman_tree::build_huffman_tree()
@@ -178,7 +191,7 @@ Node* huffman_tree::build_huffman_tree()
         left = pop_min(); 
         right = pop_min(); 
  
-        top_->character = '$';
+        top_->character = COUNTER_CHAR;
         top_->frequency =  left -> frequency + right->frequency; 
 
         top_ -> left = left; 
@@ -187,9 +200,33 @@ Node* huffman_tree::build_huffman_tree()
         insert_heap_node(top_);
     }
 
-    top_ = pop_min(); 
-
-    
+    cout << top_->right->character<<"**********\n"; 
     return top_; 
+
+}
+
+void huffman_tree::print_huffman_codes()
+{
+    int array[min_heap_->current_size * 2], n = 0; 
+    print_tree(top_, array, n); 
+}
+
+void huffman_tree::print_tree(Node* root, int tree[], int idx)
+{
+    if(root->left)
+    {
+        tree[idx] = 0; 
+        print_tree(root->left, tree, idx+1); 
+    }
+    else {
+        tree[idx] = 1; 
+        print_tree(root->right, tree, idx+1); 
+    }
+
+    if(!root->left&&!root->right)
+    {
+        std::string code = arr_to_str(tree, idx); 
+        cout <<"Character: "<<root->character<<", code: "<<code; 
+    }
 
 }

@@ -49,5 +49,8 @@ public:
     void insert_heap_node(Node* a); 
 
     Node* build_huffman_tree();
+    void print_tree(Node* root, int tree[], int idx); 
+    string arr_to_str(int tree[], int n);
+    void print_huffman_codes();
 
 }; 
