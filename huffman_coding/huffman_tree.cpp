@@ -184,41 +184,43 @@ string huffman_tree::arr_to_str(int tree[], int n)
 
 Node* huffman_tree::build_huffman_tree()
 {
-    struct Node* left, * right; 
+    struct Node* left, * right, * top; 
     
     while(min_heap_->current_size != 1)
     {
         left = pop_min(); 
         right = pop_min(); 
+
+        top = new Node; 
  
-        top_->character = COUNTER_CHAR;
-        top_->frequency =  left -> frequency + right->frequency; 
+        top->character = COUNTER_CHAR;
+        top->frequency =  left -> frequency + right->frequency; 
 
-        top_ -> left = left; 
-        top_ -> right = right; 
+        top -> left = left; 
+        top -> right = right; 
 
-        insert_heap_node(top_);
+        insert_heap_node(top);
     }
 
-    cout << top_->right->character<<"**********\n"; 
-    return top_; 
+    return pop_min(); 
 
 }
 
-void huffman_tree::print_huffman_codes()
+void huffman_tree::print_huffman_codes(Node* root)
 {
-    int array[min_heap_->current_size * 2], n = 0; 
-    print_tree(top_, array, n); 
+    int array[min_heap_->current_size * 2], n = 0;  
+    print_tree(root, array, n); 
 }
 
 void huffman_tree::print_tree(Node* root, int tree[], int idx)
-{
+{ 
     if(root->left)
     {
         tree[idx] = 0; 
         print_tree(root->left, tree, idx+1); 
     }
-    else {
+    if(root->right)
+    {
         tree[idx] = 1; 
         print_tree(root->right, tree, idx+1); 
     }
@@ -226,7 +228,7 @@ void huffman_tree::print_tree(Node* root, int tree[], int idx)
     if(!root->left&&!root->right)
     {
         std::string code = arr_to_str(tree, idx); 
-        cout <<"Character: "<<root->character<<", code: "<<code; 
+        cout <<"Character: "<<root->character<<", code: "<<code<<endl; 
     }
 
 }

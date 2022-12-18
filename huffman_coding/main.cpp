@@ -31,7 +31,7 @@ void run_compression()
     //tree.print_heap(); 
     Node* root = tree.build_huffman_tree();
     std::string out; 
-    tree.print_huffman_codes(); 
+    tree.print_huffman_codes(root); 
 }
 
 

@@ -51,6 +51,6 @@ public:
     Node* build_huffman_tree();
     void print_tree(Node* root, int tree[], int idx); 
     string arr_to_str(int tree[], int n);
-    void print_huffman_codes();
+    void print_huffman_codes(Node* root);
 
 }; 
